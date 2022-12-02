@@ -24,14 +24,28 @@ window.onload = function(){
     cvs.moveTo(cl, 0);
     cvs.lineTo(cl, 400)
   }
-  
+
   for(var rl =0 ; rl < 400 ; rl += 20){
     cvs.moveTo(0, rl);
     cvs.lineTo(400, rl)
   }
   cvs.strokeStyle ='gray'
   cvs.stroke();
+
+
+  // Snake 
+
+ cvs.fillStyle = 'yellow';
+ cvs.fillRect(80,80,20,20);
+
+// Fruite 
+
+cvs.fillStyle = 'red';
+cvs.fillRect(160,160,20,20);
+
  }
+
+ 
 
 
 // -4. Input Control 
