@@ -9,19 +9,21 @@ let fPosy =160;
 let snakeTail = [];
 let snakeSize =1 ;
 let score = 0;
+let game;
+let GameStatus = 'Ready'
 
 
 
 // -2. OnLoad Function
 window.onload = function () {
     document.addEventListener('keydown', inputControl);
-    setInterval(mainGame,200);
+   game = setInterval(mainGame,200);
 }
 
 
 // -3. Main Game Funtion 
 function mainGame() {
-
+    document.getElementById('game-status').innerHTML = GameStatus;
     document.getElementById('score').innerHTML =score
 
 
@@ -76,6 +78,12 @@ function mainGame() {
       cvs.fillRect(
         snakeTail[i].x,snakeTail[i].y,20,20
       );   
+      if(sPosx == snakeTail[i].x && sPosy == snakeTail[i].y && snakeSize>1){
+// Game over
+        clearInterval(game)
+        GameStatus = 'Game Over'
+        document.getElementById('game-status').innerHTML = GameStatus
+      }
     }
 
     // Fruite 
@@ -124,7 +132,12 @@ function inputControl(e) {
             //left
             nPosx -=20
             nPosy =0;
-            break
+            break     
+    }
+
+    if(e.keyCode == 37|| e.keyCode == 38||e.keyCode == 39|| e.keyCode ==40){
+        GameStatus = 'Game Started'
+        document.getElementById('game-status').innerHTML = GameStatus
     }
 
 }
