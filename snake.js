@@ -6,6 +6,8 @@ let nPosx =0;
 let nPosy =0;
 let fPosx =160;
 let fPosy =160;
+let snakeTail = [];
+let snakeSize =1 ;
 
 
 // -2. OnLoad Function
@@ -64,7 +66,12 @@ function mainGame() {
     // Snake 
 
     cvs.fillStyle = 'yellow';
-    cvs.fillRect(sPosx, sPosy, 20, 20);
+    
+    for (let i = 0; i < snakeTail.length; i++) {
+      cvs.fillRect(
+        snakeTail[i].x,snakeTail[i].y,20,20
+      );   
+    }
 
     // Fruite 
 
@@ -74,10 +81,14 @@ function mainGame() {
     //if snake eat fruit
    
  if(sPosx == fPosx && sPosy ==fPosy){
+    snakeSize++;
     fPosx =Math.floor(Math.random()*20)*20
     fPosy =Math.floor(Math.random()*20)*20
- }
-   
+   }
+   snakeTail.push({x:sPosx,y:sPosy})
+   while(snakeTail.length>snakeSize){
+    snakeTail.shift();
+   }
 }
 
 
