@@ -4,6 +4,8 @@ let sPosx =80;
 let sPosy =80;
 let nPosx =0;
 let nPosy =0;
+let fPosx =160;
+let fPosy =160;
 
 
 // -2. OnLoad Function
@@ -67,8 +69,15 @@ function mainGame() {
     // Fruite 
 
     cvs.fillStyle = 'red';
-    cvs.fillRect(160, 160, 20, 20);
+    cvs.fillRect(fPosx, fPosy, 20, 20);
 
+    //if snake eat fruit
+   
+ if(sPosx == fPosx && sPosy ==fPosy){
+    fPosx =Math.floor(Math.random()*20)*20
+    fPosy =Math.floor(Math.random()*20)*20
+ }
+   
 }
 
 
