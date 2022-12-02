@@ -1,51 +1,104 @@
 // -1. Variable Declaration.
-var cvs = document.getElementById('canvas').getContext('2d')
-
+const cvs = document.getElementById('canvas').getContext('2d')
+let sPosx =80;
+let sPosy =80;
+let nPosx =0;
+let nPosy =0;
 
 
 // -2. OnLoad Function
-window.onload = function(){
-    mainGame();
+window.onload = function () {
+    document.addEventListener('keydown', inputControl);
+    setInterval(mainGame,200);
 }
 
 
 // -3. Main Game Funtion 
- function mainGame(){
-   // game Area 
-   
-   //backgroung color 
-   cvs.fillStyle = 'black';
-   cvs.fillRect(0,0,400,400);
+function mainGame() {
 
+//move snake
 
-   // Grid line
+    sPosx  += nPosx
+    sPosy += nPosy
 
-  for(var cl =0 ; cl < 400 ; cl += 20){
-    cvs.moveTo(cl, 0);
-    cvs.lineTo(cl, 400)
+  // control Snake Monement
+  
+  if(sPosx>400){
+    sPosx =0;
+  }
+  if(sPosy>400){
+    sPosy =0;
+  }
+  if(sPosx<0){
+    sPosx =400;
+  }
+  if(sPosy<0){
+    sPosy = 400;
   }
 
-  for(var rl =0 ; rl < 400 ; rl += 20){
-    cvs.moveTo(0, rl);
-    cvs.lineTo(400, rl)
-  }
-  cvs.strokeStyle ='gray'
-  cvs.stroke();
+// <---=====game Area====--> 
+
+//backgroung color 
+
+    cvs.fillStyle = 'black';
+    cvs.fillRect(0, 0, 400, 400);
 
 
-  // Snake 
+    // Grid line
 
- cvs.fillStyle = 'yellow';
- cvs.fillRect(80,80,20,20);
+    for (var cl = 0; cl < 400; cl += 20) {
+        cvs.moveTo(cl, 0);
+        cvs.lineTo(cl, 400)
+    }
 
-// Fruite 
+    for (var rl = 0; rl < 400; rl += 20) {
+        cvs.moveTo(0, rl);
+        cvs.lineTo(400, rl)
+    }
+    cvs.strokeStyle = 'gray'
+    cvs.stroke();
 
-cvs.fillStyle = 'red';
-cvs.fillRect(160,160,20,20);
 
- }
+    // Snake 
 
- 
+    cvs.fillStyle = 'yellow';
+    cvs.fillRect(sPosx, sPosy, 20, 20);
+
+    // Fruite 
+
+    cvs.fillStyle = 'red';
+    cvs.fillRect(160, 160, 20, 20);
+
+}
+
+
 
 
 // -4. Input Control 
+
+function inputControl(e) {
+
+    switch (e.keyCode) {
+        case 38:
+            //up
+            nPosy-=20
+            nPosx =0;
+            break;
+        case 40:
+            //down
+           nPosy += 20
+           nPosx =0;
+            break;
+        case 39:
+            //right
+            nPosx += 20;
+            nPosy =0;
+            break;
+        case 37:
+            //left
+            nPosx -=20
+            nPosy =0;
+            break
+    }
+
+}
